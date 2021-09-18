@@ -56,8 +56,6 @@ const imprimirArchivos = async (archivos) => {
                 reject({ success: false, err });
               }
 
-              console.log('PythonShell results: %j', results);
-
               resolve({ success: true, results });
             }
           );
@@ -68,27 +66,14 @@ const imprimirArchivos = async (archivos) => {
       }
     );
 
-    console.log("python call ends");
-
     if (!success) {
-      console.log("Test Error: " + err);
+      console.error(err);
       return;
     }
-
-    console.log("The result is: " + results);
-
-    // My code here
-
-    console.log("end runTest()");
-
   });
 }
 
 const ejecutar = async () => {
-  /* const facturas = await leerDirectorio();
-  await imprimirArchivos(facturas);
-  await eliminarArchivos(facturas);
-  ejecutar(); */
   leerDirectorio().then(facturas => {
     imprimirArchivos(facturas).then(() => {
       eliminarArchivos(facturas).then(() => {
@@ -99,15 +84,3 @@ const ejecutar = async () => {
 }
 
 ejecutar()
-
-/* do {
-  leerDirectorio().then(facturas => {
-    imprimirArchivos(facturas).then(() => {
-      eliminarArchivos(facturas).then(() => {
-      })
-    })
-  });
-
-
-} while (true); */
-
