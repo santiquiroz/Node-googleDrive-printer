@@ -1,6 +1,8 @@
 import os, sys
 import win32print
+import sys
 
+print(sys.argv)
 printer_name = win32print.GetDefaultPrinter ()
 
 if sys.version_info >= (3,):
@@ -10,7 +12,7 @@ else:
 
 hPrinter = win32print.OpenPrinter (printer_name)
 try:
-  hJob = win32print.StartDocPrinter (hPrinter, 1, ("Test de datos en bruto", None, "RAW"))
+  hJob = win32print.StartDocPrinter (hPrinter, 1, (sys.argv[1], None, "RAW"))
   try:
     win32print.StartPagePrinter (hPrinter)
     win32print.WritePrinter (hPrinter, raw_data)

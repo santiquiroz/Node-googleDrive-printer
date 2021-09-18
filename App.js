@@ -21,7 +21,6 @@ const leerDirectorio = async () => {
 
   });
   files.forEach(file => {
-    console.log(file);
     if (path.extname(file) == '.' + fileextension) {
       archivos.push(file);
     }
