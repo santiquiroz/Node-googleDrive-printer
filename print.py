@@ -6,9 +6,9 @@ print(sys.argv)
 printer_name = win32print.GetDefaultPrinter ()
 
 if sys.version_info >= (3,):
-  raw_data = bytes ("This is a test", "utf-8")
+  raw_data = bytes (sys.argv[1], "utf-8")
 else:
-  raw_data = "This is a test"
+  raw_data = sys.argv[1]
 
 hPrinter = win32print.OpenPrinter (printer_name)
 try:
