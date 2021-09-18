@@ -1,0 +1,27 @@
+{
+  "name": "node-googledrive-printer",
+  "version": "1.0.0",
+  "description": "A simple Node application that keeps looking for a file in a path to print. The main idea is to use the google drive filestream shared drives to avoid the use of a rest api.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node App.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santiquiroz/Node-googleDrive-printer.git"
+  },
+  "keywords": [
+    "printer"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santiquiroz/Node-googleDrive-printer/issues"
+  },
+  "homepage": "https://github.com/santiquiroz/Node-googleDrive-printer#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "printer": "^0.4.0"
+  }
+}
