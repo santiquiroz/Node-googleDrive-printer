@@ -31,39 +31,40 @@ const leerDirectorio = async () => {
 
 const eliminarArchivos = async (archivos) => {
   archivos.forEach(async (archivo) => {
-    await fs.unlink(printerpath + "\\" + archivo, (err) => {
-      if (err) {
-        console.error(err);
-      }
-    })
+    fs2.unlinkSync(printerpath + "\\" + archivo);
   });
 }
 
 const imprimirArchivos = async (archivos) => {
   archivos.forEach(async (archivo) => {
-    let info = fs2.readFileSync(printerpath + "\\" + archivo).toString();
+    const info = fs2.readFileSync(printerpath + "\\" + archivo);
 
-    var options = {
+    const options = {
       mode: 'text',
       pythonPath: 'python',
       pythonOptions: [],
       scriptPath: '',
-      args: [info]
+      args: [info.toString()]
     };
 
     const { success, err = '', results } = await new Promise(
       (resolve, reject) => {
-        PythonShell.run('print.py', options,
-          function (err, results) {
-            if (err) {
-              reject({ success: false, err });
+        try {
+          PythonShell.run('print.py', options,
+            function (err, results) {
+              if (err) {
+                reject({ success: false, err });
+              }
+
+              console.log('PythonShell results: %j', results);
+
+              resolve({ success: true, results });
             }
-
-            console.log('PythonShell results: %j', results);
-
-            resolve({ success: true, results });
-          }
-        );
+          );
+        } catch (error) {
+          console.error(error);
+          reject({ success: false, err });
+        }
       }
     );
 
@@ -83,15 +84,30 @@ const imprimirArchivos = async (archivos) => {
   });
 }
 
-
-/* do { */
-leerDirectorio().then(facturas => {
-  imprimirArchivos(facturas).then(() => {
-    eliminarArchivos(facturas).then(() => {
+const ejecutar = async () => {
+  /* const facturas = await leerDirectorio();
+  await imprimirArchivos(facturas);
+  await eliminarArchivos(facturas);
+  ejecutar(); */
+  leerDirectorio().then(facturas => {
+    imprimirArchivos(facturas).then(() => {
+      eliminarArchivos(facturas).then(() => {
+        setTimeout(ejecutar, 1000);
+      })
     })
-  })
-});
+  });
+}
+
+ejecutar()
+
+/* do {
+  leerDirectorio().then(facturas => {
+    imprimirArchivos(facturas).then(() => {
+      eliminarArchivos(facturas).then(() => {
+      })
+    })
+  });
 
 
-/* } while (true); */
+} while (true); */
 
