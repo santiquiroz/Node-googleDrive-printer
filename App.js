@@ -1,9 +1,13 @@
 //configuring enviroment variables
 require('dotenv').config();
 
+let { PythonShell } = require('python-shell');
+
 const fs = require('fs').promises;
-const printer = require('printer');
+const fs2 = require('fs');
 const path = require('path');
+
+
 const printerpath = process.env.PRINTERPATH;
 const fileextension = process.env.FILEEXTENSION;
 
@@ -37,19 +41,46 @@ const eliminarArchivos = async (archivos) => {
 }
 
 const imprimirArchivos = async (archivos) => {
-  archivos.forEach(archivo =>{
-    let info = fs.readFileSync(printerpath + "\\" + archivo).toString();
-    printer.printDirect({
-      data: info,
-      type: 'RAW',
-      success: function (jobID) {
-        console.log("ID: " + jobID);
-      },
-      error: function (err) {
-        console.log('printer module error: '+err);
-        throw err;
+  archivos.forEach(async (archivo) => {
+    let info = fs2.readFileSync(printerpath + "\\" + archivo).toString();
+
+    var options = {
+      mode: 'text',
+      pythonPath: 'python',
+      pythonOptions: [],
+      scriptPath: '',
+      args: [info]
+    };
+
+    const { success, err = '', results } = await new Promise(
+      (resolve, reject) => {
+        PythonShell.run('print.py', options,
+          function (err, results) {
+            if (err) {
+              reject({ success: false, err });
+            }
+
+            console.log('PythonShell results: %j', results);
+
+            resolve({ success: true, results });
+          }
+        );
       }
-    });
+    );
+
+    console.log("python call ends");
+
+    if (!success) {
+      console.log("Test Error: " + err);
+      return;
+    }
+
+    console.log("The result is: " + results);
+
+    // My code here
+
+    console.log("end runTest()");
+
   });
 }
 
