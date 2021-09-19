@@ -25,4 +25,4 @@ npm install
 ## Optional Configuration
 If you want to run this software as a windows service, we recomend you to use [NSSM](https://nssm.cc/download) and install the print.bat file as a service.
 
-Are you guessing about the "google drive" on the project's name? ... well, we needed to print a ticket remotely via a non-API (REST API or something similar) so we decided to use [google drive filestream](https://support.google.com/a/answer/7491144?hl=es#zippy=%2Cwindows) and configure our program to search in a shared drive where another program generates the ticket file remotely, it takes an average of 7 seconds to synchronize but... at least it works !!! ¯\_(ツ)_/¯
+Are you wondering about the "google drive" on the project's name? ... well, we needed to print a ticket remotely via a non-API (REST API or something similar) so we decided to use [google drive filestream](https://support.google.com/a/answer/7491144?hl=es#zippy=%2Cwindows) and configure our program to search in a shared drive where another program generates the ticket file remotely, it takes an average of 7 seconds to synchronize but... at least it works !!! ¯\_(ツ)_/¯
