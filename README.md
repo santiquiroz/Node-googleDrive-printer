@@ -14,7 +14,7 @@ pip install win32printing
 ```
 
 ## Installation
-1) Install all dependeces wwith the following command:
+1) Install all dependeces with the following command:
 ```bash
 npm install
 ```
