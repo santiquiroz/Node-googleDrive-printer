@@ -17,6 +17,7 @@ try:
     win32print.StartPagePrinter (hPrinter)
     win32print.WritePrinter (hPrinter, raw_data)
     win32print.EndPagePrinter (hPrinter)
+    win32print.WritePrinter(hPrinter, b'\x1dV\x00')
   finally:
     win32print.EndDocPrinter (hPrinter)
 finally:
