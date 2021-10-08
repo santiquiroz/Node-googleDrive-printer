@@ -1,6 +1,9 @@
 # Node-googleDrive-printer
 A basic node program that keeps looking for a file in a path to print.
 
+### WARNING
+The project support has finished due problems related to termal printer connections
+
 ## Program Behaviour
 The Node program will be looking for files in a path that matches a given extension to print through a python program and later when the file has been printed the node program deletes it.
 
